@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploading</title>
+</head>
+<body>
+     
+    <!-- Binary Data Conversion of Image Path and Set on <Img> -->
+
+    Upload Image
+    <br><br>
+    <input type="file" onchange="uploadImage(this)"><br /><br/>
+    <img src="" alt="none" width="300px" height="300px">
+    <script>
+        function uploadImage(object) {
+            let image = document.querySelector("img")
+            // console.log(object.files[0])
+            // console.log(object)
+
+            //Making a new reference Variable for FileReader() Object
+            var reader = new FileReader();
+
+            //Using addEventListener to load data into storage
+            reader.addEventListener('load', function () {
+                //Print on Console to check the BinaryDataURL
+                console.log(reader.result)
+                //set the src value of Img
+                image.src = reader.result
+
+                //To Store BinaryDataURL in local_Storage for future use
+                window.localStorage.setItem('img_data', (reader.result))
+            })
+
+            //Conversing the Original Path to Binary URL
+            reader.readAsDataURL(object.files[0])
+        }
+    </script>
+</body>
+</html>
+
+<!--Code by Dev-Paramjeet -->
